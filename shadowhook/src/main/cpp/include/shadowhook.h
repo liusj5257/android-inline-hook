@@ -146,7 +146,7 @@ void *shadowhook_get_return_address(void);
 // call previous function in proxy-function
 #ifdef __cplusplus
 #define SHADOWHOOK_CALL_PREV(func, ...) \
-  ((decltype(&(func)))shadowhook_get_prev_func((void *)(func)))(__VA_ARGS__)
+  (*(decltype(&(func)))shadowhook_get_prev_func((void *)(func)))(__VA_ARGS__)
 #else
 #define SHADOWHOOK_CALL_PREV(func, func_sig, ...) \
   ((func_sig)shadowhook_get_prev_func((void *)(func)))(__VA_ARGS__)
